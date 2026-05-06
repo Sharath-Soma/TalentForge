@@ -1,55 +1,226 @@
-Deployment Guide
+# 🚀 TalentForge
 
-Overview
-- Frontend: deploy to Vercel (static SPA built with Vite).
-- Backend: deploy to Render / Heroku / similar (Flask + Gunicorn).
+> An all-in-one AI-powered platform for job searching, resume screening, and career recommendation.
 
-Frontend (Vercel)
-1. In Vercel project settings, set an Environment Variable:
-   - `VITE_API_URL` = `https://your-backend-url`
-2. Build command: `npm run build` (already set in project)
-3. Output directory: `dist`
-4. `vercel.json` is included to rewrite all routes to `index.html` for SPA routing.
+---
 
-Backend (Render)
-1. Create a new Web Service (Docker or Python/Flask).
-2. Set the following Environment Variables in your service:
-   - `FLASK_APP_SECRET_KEY` (required)
-   - `DATABASE_URL` (required)
-   - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` (if using Google OAuth)
-   - `FRONTEND_URL` = `https://your-frontend-url` (used for CORS)
-   - `OPENAI_API_KEY` (if using OpenAI features)
-   - Optional: `JUDGE0_URL` (if you host a Judge0-compatible service for the Code Lab)
-3. Start command (Render): `gunicorn -w 4 -b 0.0.0.0:$PORT flask_server.app:app`
-   - A `Procfile` is included in `flask_server/Procfile`.
-4. Ensure `requirements.txt` includes `gunicorn` (already present).
+## 📌 Overview
 
-Important notes
-- Do NOT commit `.env` files with secrets. Use the provided `frontend/.env.example` and `flask_server/.env.example` as templates.
-- CORS: The backend reads `FRONTEND_URL` and configures CORS origins accordingly. Set it to your deployed frontend domain.
-- Code Lab / Judge0: The compiler endpoint is opt-in. If `JUDGE0_URL` is not set the endpoint returns 503 with a safe message.
+TalentForge is a full-stack AI-driven career platform designed to help users discover jobs, analyze resumes, receive intelligent recommendations, and track applications efficiently.
 
-Order of setup
-1. Deploy backend first and configure environment variables.
-2. Set `VITE_API_URL` in Vercel to point to backend.
-3. Deploy frontend to Vercel.
-4. Test flows: login/signup, Google OAuth redirect, navigation refreshes, API calls.
+The platform combines modern web technologies with machine learning to create a smarter job-search ecosystem.
 
-Local testing
-- Frontend build locally: `cd frontend && npm run build`
-- Backend run locally (example):
+---
+
+# ✨ Features
+
+- 🤖 AI-based Job Recommendation
+- 📄 Resume Screening & Analysis
+- 🔐 JWT User Authentication
+- 🎓 Course Recommendation System
+- 📌 Job Application Tracking
+- 👤 User Profile Management
+- 📊 Machine Learning Integration
+- ⚡ Responsive Modern UI
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+- React
+- Vite
+- JavaScript
+- CSS
+
+## Backend
+- Flask
+- Python
+- JWT Authentication
+
+## Database
+- MongoDB
+
+## Machine Learning
+- Scikit-learn
+- Job Recommendation Models
+- Resume Analysis
+
+---
+
+# 📂 Project Structure
 
 ```bash
-# from project root
-# Use a virtualenv and install requirements
+TalentForge/
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── flask_server/
+│   ├── app.py
+│   ├── auth/
+│   ├── user/
+│   ├── features/
+│   └── requirements.txt
+│
+├── ml_prediction/
+│   ├── models/
+│   ├── datasets/
+│   └── notebooks/
+│
+├── README.md
+├── requirements.txt
+└── .gitignore
+```
+
+---
+
+# ⚙️ Installation & Setup
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/Sharath-Soma/TalentForge.git
+```
+
+---
+
+## 2️⃣ Navigate Into Project
+
+```bash
+cd TalentForge
+```
+
+---
+
+# 🔧 Backend Setup
+
+## Create Virtual Environment
+
+```bash
 python -m venv venv
-venv\Scripts\activate
-pip install -r flask_server/requirements.txt
-# set env vars or copy flask_server/.env.example -> flask_server/.env (DO NOT commit)
-cd flask_server
+```
+
+### Activate Virtual Environment
+
+### Windows
+
+```bash
+venv\\Scripts\\activate
+```
+
+### Linux/Mac
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+## Install Backend Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Run Flask Server
+
+```bash
 python app.py
 ```
 
-Security
-- Secrets should be stored in the host's environment configuration.
-- If secrets were committed previously, consider rotating them and purging git history.
+---
+
+# 💻 Frontend Setup
+
+## Navigate to Frontend
+
+```bash
+cd frontend
+```
+
+---
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## Start Frontend
+
+```bash
+npm run dev
+```
+
+---
+
+# 🔐 Environment Variables
+
+Create a `.env` file and add required credentials.
+
+Example:
+
+```env
+MONGO_URI=your_mongodb_uri
+JWT_SECRET_KEY=your_secret_key
+OPENAI_API_KEY=your_api_key
+```
+
+---
+
+# 🧠 Machine Learning Modules
+
+The project includes ML-based functionalities such as:
+
+- Intelligent Job Recommendation
+- Resume Screening
+- Course Recommendation
+- Skill Matching
+
+---
+
+# 📈 Future Improvements
+
+- Real-time Chatbot Integration
+- AI Interview Preparation
+- Resume Score Visualization
+- Email Notifications
+- Recruiter Dashboard
+- Cloud Deployment
+- Docker Support
+
+---
+
+# 🤝 Contribution
+
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit changes
+4. Push to branch
+5. Open a Pull Request
+
+---
+
+# 👨‍💻 Author
+
+## Soma Sharath Kumar
+
+GitHub:
+https://github.com/Sharath-Soma/TalentForge
+
+---
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a star on GitHub.
+
+---
