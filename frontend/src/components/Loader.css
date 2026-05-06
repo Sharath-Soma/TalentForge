@@ -1,0 +1,59 @@
+.loader-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  justify-content: center;
+}
+
+.loader-orbit {
+  position: relative;
+  width: 72px;
+  height: 72px;
+}
+
+.loader-orbit__ring,
+.loader-orbit__core {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.loader-orbit__ring--outer {
+  border: 2px solid color-mix(in srgb, var(--color-primary) 18%, transparent);
+  border-top-color: var(--color-primary);
+  animation: loader-spin 1s linear infinite;
+}
+
+.loader-orbit__ring--inner {
+  inset: 10px;
+  border: 2px solid color-mix(in srgb, var(--color-primary-strong) 16%, transparent);
+  border-bottom-color: var(--color-primary-strong);
+  animation: loader-spin-reverse 1.25s linear infinite;
+}
+
+.loader-orbit__core {
+  inset: 24px;
+  background: var(--gradient-primary);
+  box-shadow: 0 0 0 10px color-mix(in srgb, var(--color-primary-soft) 90%, transparent);
+}
+
+.loader-copy {
+  max-width: 320px;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
